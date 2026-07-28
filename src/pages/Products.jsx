@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Search, SlidersHorizontal, RotateCcw, PackageSearch, Sparkles } from 'lucide-react';
+import { Search, SlidersHorizontal, RotateCcw, PackageSearch } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import {
   selectAllProducts,
@@ -74,33 +74,33 @@ export default function Products() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
         <div>
           <h1 className="font-heading text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Explore All Products
           </h1>
-          <p className="text-slate-400 text-sm mt-1">
-            Showing <strong className="text-white">{sortedProducts.length}</strong> of {allProducts.length} total items
+          <p className="text-zinc-400 text-sm mt-1">
+            Showing <strong className="text-[#bef264]">{sortedProducts.length}</strong> of {allProducts.length} total items
           </p>
         </div>
 
         {/* Live Search Input */}
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-3.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => dispatch(setSearchQuery(e.target.value))}
             placeholder="Search products, brands..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#141416] border border-zinc-800 text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-[#bef264] transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => dispatch(setSearchQuery(''))}
-              className="absolute right-3 top-3 text-xs text-slate-500 hover:text-slate-300"
+              className="absolute right-3 top-3 text-xs text-zinc-500 hover:text-zinc-300"
             >
               Clear
             </button>
@@ -109,7 +109,7 @@ export default function Products() {
       </div>
 
       {/* Control Bar: Categories & Sort & Filter Slider */}
-      <div className="glass-card rounded-2xl p-4 border border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="bg-[#0c0c0e] rounded-2xl p-4 border border-[#222226] flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
         {/* Category Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
@@ -120,10 +120,10 @@ export default function Products() {
                 dispatch(setCategory(cat.value));
                 setSearchParams(cat.value === 'all' ? {} : { category: cat.value });
               }}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat.value
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
-                  : 'bg-slate-900/80 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800'
+                  ? 'bg-[#bef264] text-black font-extrabold shadow-md shadow-[#bef264]/10'
+                  : 'bg-[#141416] text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-800'
               }`}
             >
               {cat.label}
@@ -132,10 +132,10 @@ export default function Products() {
         </div>
 
         {/* Filters Right Column (Price & Sort) */}
-        <div className="flex flex-wrap items-center gap-4 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-800">
+        <div className="flex flex-wrap items-center gap-4 pt-2 lg:pt-0 border-t lg:border-t-0 border-zinc-800">
           
           {/* Price Range */}
-          <div className="flex items-center gap-2 text-xs text-slate-400 min-w-[180px]">
+          <div className="flex items-center gap-2 text-xs text-zinc-400 min-w-[180px]">
             <span>Max Price:</span>
             <input
               type="range"
@@ -144,18 +144,18 @@ export default function Products() {
               step="10"
               value={selectedPrice}
               onChange={(e) => dispatch(setSelectedPrice(Number(e.target.value)))}
-              className="accent-indigo-500 cursor-pointer flex-1"
+              className="accent-[#bef264] cursor-pointer flex-1"
             />
-            <span className="font-bold text-white">${selectedPrice}</span>
+            <span className="font-bold text-[#bef264]">${selectedPrice}</span>
           </div>
 
           {/* Sort Dropdown */}
           <div className="flex items-center gap-2">
-            <SlidersHorizontal className="w-4 h-4 text-slate-400" />
+            <SlidersHorizontal className="w-4 h-4 text-zinc-400" />
             <select
               value={sortBy}
               onChange={(e) => dispatch(setSortBy(e.target.value))}
-              className="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 font-semibold focus:outline-none focus:border-indigo-500"
+              className="bg-[#141416] border border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-200 font-semibold focus:outline-none focus:border-[#bef264]"
             >
               <option value="all">Sort by: Default</option>
               <option value="price-asc">Price: Low to High</option>
@@ -172,7 +172,7 @@ export default function Products() {
                 dispatch(resetFilters());
                 setSearchParams({});
               }}
-              className="flex items-center gap-1 text-xs text-red-400 hover:text-red-300 font-semibold px-2.5 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 transition-colors"
+              className="flex items-center gap-1 text-xs text-red-400 hover:text-red-300 font-semibold px-2.5 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               Reset
@@ -185,12 +185,12 @@ export default function Products() {
 
       {/* Product Grid */}
       {sortedProducts.length === 0 ? (
-        <div className="py-20 text-center glass-panel rounded-3xl border border-slate-800 max-w-md mx-auto p-8">
-          <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-600 mx-auto mb-4">
-            <PackageSearch className="w-8 h-8 text-indigo-400" />
+        <div className="py-20 text-center bg-[#0c0c0e] rounded-3xl border border-[#222226] max-w-md mx-auto p-8">
+          <div className="w-16 h-16 rounded-2xl bg-[#141416] border border-zinc-800 flex items-center justify-center text-zinc-500 mx-auto mb-4">
+            <PackageSearch className="w-8 h-8 text-[#bef264]" />
           </div>
           <h3 className="font-heading text-xl font-bold text-white mb-2">No Products Found</h3>
-          <p className="text-slate-400 text-sm mb-6">
+          <p className="text-zinc-400 text-sm mb-6">
             We couldn't find any products matching your current filters or search query.
           </p>
           <button
@@ -198,7 +198,7 @@ export default function Products() {
               dispatch(resetFilters());
               setSearchParams({});
             }}
-            className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-semibold text-sm transition-all shadow-lg shadow-indigo-600/30"
+            className="px-6 py-2.5 bg-[#bef264] hover:bg-[#a3e635] text-black font-extrabold text-sm rounded-xl transition-all shadow-md cursor-pointer"
           >
             Clear Filters
           </button>
